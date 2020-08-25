@@ -1,0 +1,24 @@
+<div class="container">
+
+  <h1>Quotes</h1>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-6">
+      <ul>
+        <div *ngFor='let quote of quotes; let i = index'>
+          <li appHighlight>{{ quote.name }} due on {{quote.completeDate|date}}</li>
+          <button (click)='toggleDetails(i)' class="btn btn-outline-success">Click to see Author</button>
+          <app-quote-detail *ngIf='quote.showAuthor' [quote]='quote' (isComplete) = 'completeQuote($event,i)'></app-quote-detail>
+        </div>
+      </ul>
+      <p *ngIf='quotes.length > 5'>Your quotes are too many</p>
+    </div>
+
+    <div class="col-md-6">
+      <app-quote-form (addQuote)="addNewQuote($event)"></app-quote-form>
+    </div>
+  </div>
+
+</div>
+
